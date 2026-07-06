@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* ─── Base ──────────────────────────────────────────────────── */
+@theme {
+  /* Register your custom font variables in the v4 theme */
+  --font-playfair: var(--font-playfair), 'Playfair Display', serif;
+  --font-dm-sans: var(--font-dm-sans), 'DM Sans', sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-dm-sans);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-playfair);
+  }
+}
+
+/* ─── Reusable component classes ────────────────────────────── */
+@layer components {
+  /* Imperial CTA button */
+  .btn-imperial {
+    @apply inline-flex items-center gap-3
+           bg-[#c05a2a] text-white
+           px-8 py-4 rounded-[10px]
+           font-dm-sans font-semibold uppercase tracking-widest text-sm
+           no-underline
+           transition-all duration-300
+           hover:bg-[#a64d24] hover:-translate-y-0.5;
+  }
+
+  .btn-imperial .arrow {
+    @apply text-xl transition-transform duration-300;
+  }
+
+  .btn-imperial:hover .arrow {
+    @apply translate-x-1.5;
+  }
+
+  /* Navbar underline hover */
+  .nav-link-underline {
+    @apply relative text-[#2b2b2b] font-medium no-underline
+           after:content-[''] after:absolute after:left-0 after:-bottom-1.5
+           after:h-0.5 after:w-0 after:bg-[#c05a2a]
+           after:transition-all after:duration-300
+           hover:after:w-full;
+  }
+
+  /* Category tile overlay */
+  .tile-overlay {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+  }
+
+  /* Hero overlay */
+  .hero-overlay {
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0,0.5) 0%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0.1) 100%
+    );
+  }
+
+  /* WhatsApp button */
+  .btn-whatsapp {
+    @apply flex-1 flex items-center justify-center gap-2
+           bg-[#25d366] text-white font-bold text-sm uppercase
+           py-3 px-4 rounded-md no-underline
+           transition-opacity duration-200
+           hover:opacity-90;
+  }
+
+  /* Instagram button */
+  .btn-instagram {
+    @apply flex-1 flex items-center justify-center gap-2
+           bg-[#e4405f] text-white font-bold text-sm uppercase
+           py-3 px-4 rounded-md no-underline
+           transition-opacity duration-200
+           hover:opacity-90;
+  }
+}
