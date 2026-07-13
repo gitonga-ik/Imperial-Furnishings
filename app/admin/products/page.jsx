@@ -70,7 +70,7 @@ export default async function AdminProductsPage() {
                   <td className="px-5 py-3 font-medium text-[#2b2b2b]">
                     {product.name}
                   </td>
-                  <td className="px-5 py-3 text-[#555]">{product.category?.name}</td>
+                  <td className="px-5 py-3 text-[#555]"><a href={`/admin/categories/${product.category?.slug}`}>{product.category?.name}</a></td>
                   <td className="px-5 py-3 text-[#555]">
                     Ksh. {product.price.toLocaleString()}
                   </td>

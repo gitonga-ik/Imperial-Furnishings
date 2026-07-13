@@ -31,7 +31,7 @@ export default function Footer() {
               className="text-[#cccccc] hover:text-[#d4af37] transition-colors text-lg"
             >
               {/* Facebook icon — install @fortawesome/react-fontawesome or replace with an SVG icon component */}
-              <i className="fab fa-facebook-f" />
+              <i className="bi bi-facebook" />
             </a>
             <a
               href="#"
@@ -90,8 +90,7 @@ export default function Footer() {
             >
               <div className="w-10 h-10 rounded-full bg-[#333] flex items-center justify-center text-xl shrink-0
                               group-hover:bg-[#c05a2a] transition-colors duration-300">
-                {/* Bootstrap Icons bi-telephone — add bootstrap-icons package or replace with SVG */}
-                <i className="bi bi-telephone" />
+                <i className="bi bi-telephone-inbound" />
               </div>
               <div>
                 <span className="block text-[#888] text-[0.7rem] uppercase tracking-widest">Call Us</span>

@@ -1,13 +1,8 @@
-// app/admin/login/page.jsx
-// Split-panel login: decorative left panel + form right panel.
-// This page sits OUTSIDE the admin layout (no sidebar) — see app/admin/login/layout.jsx
-
 export const metadata = { title: 'Sign In | Admin — Imperial Furnishings' };
 
 import LoginForm from './LoginForm';
 
-export default function LoginPage() {
-  return (
+export default function LoginPage() {  return (
     <div className="min-h-screen flex font-dm-sans">
 
       {/* ── Left decorative panel ─────────────────────────────── */}

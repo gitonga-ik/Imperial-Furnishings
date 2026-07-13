@@ -126,23 +126,23 @@ export default async function DashboardPage() {
             <table className="w-full text-sm">
               <thead className="bg-[#faf7f2] border-b border-[#e8e0d5]">
                 <tr>
-                  {['Name', 'Category', 'Price', 'Added', ''].map((h) => (
-                    <th key={h} className="text-left px-5 py-3 text-xs uppercase tracking-wider text-[#888] font-semibold">
-                      {h}
+                  {['Name', 'Category', 'Price', 'Added', ''].map((header) => (
+                    <th key={header} className="text-left px-5 py-3 text-xs uppercase tracking-wider text-[#888] font-semibold">
+                      {header}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f0ece6]">
-                {recent.map((p) => (
-                  <tr key={p.id} className="hover:bg-[#faf7f2] transition-colors">
-                    <td className="px-5 py-3 font-medium text-[#2b2b2b]">{p.name}</td>
-                    <td className="px-5 py-3 text-[#555]">{p.category?.name}</td>
-                    <td className="px-5 py-3 text-[#555]">Ksh. {p.price.toLocaleString()}</td>
-                    <td className="px-5 py-3 text-[#888]">{new Date(p.createdAt).toLocaleDateString()}</td>
+                {recent.map((product) => (
+                  <tr key={product.id} className="hover:bg-[#faf7f2] transition-colors">
+                    <td className="px-5 py-3 font-medium text-[#2b2b2b]">{product.name}</td>
+                    <td className="px-5 py-3 text-[#555]">{product.category?.name}</td>
+                    <td className="px-5 py-3 text-[#555]">Ksh. {product.price.toLocaleString()}</td>
+                    <td className="px-5 py-3 text-[#888]">{new Date(product.createdAt).toLocaleDateString()}</td>
                     <td className="px-5 py-3 text-right">
                       <Link
-                        href={`/admin/products/${p.id}`}
+                        href={`/admin/products/${product.slug}`}
                         className="text-[#c05a2a] text-xs font-medium hover:underline no-underline"
                       >
                         View

@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: ['subchronically-intergroup-shante.ngrok-free.dev']
 };
 
 export default nextConfig;

@@ -113,20 +113,22 @@ export async function getAllProducts(): Promise<PayloadResponse> {
   try {
     const products = await prisma.product.findMany({
       select: {
+        id: true,
         name: true,
         slug: true,
         image: true,
         price: true,
-        createdAt : true,
+        createdAt: true,
         category: {
-          select: { name: true },
+          select: { name: true, slug: true },
         },
         createdBy: {
           select: {
             name: true,
           },
         },
-      },orderBy: { createdAt: 'desc' }
+      },
+      orderBy: { createdAt: "desc" },
     });
 
     return {

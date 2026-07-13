@@ -1,10 +1,6 @@
-// app/components/admin/AdminTopbar.jsx
-// Shows current user name and a logout button.
-// TODO: pull { user } from your session/auth provider.
-
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const LABELS = {
   '/admin/dashboard':   'Dashboard',
@@ -22,12 +18,22 @@ function pageTitle(pathname) {
   return 'Admin';
 }
 
-export default function AdminTopbar() {
+export default function AdminTopbar({session}) {
   const pathname = usePathname();
+  const router = useRouter();
 
-  function handleLogout() {
-    // TODO: call your sign-out function (e.g. signOut() from next-auth)
-    //       then redirect to /admin/login
+  async function handleLogout() {
+    const response = await fetch("/api/admin/logout", {
+          method: "POST",
+        });
+    
+    const result = await response.json();
+
+    if(result.success){
+      router.push("/admin/login")
+    }
+
+    router.refresh();
   }
 
   return (
@@ -36,11 +42,10 @@ export default function AdminTopbar() {
         {pageTitle(pathname)}
       </h1>
       <div className="flex items-center gap-4">
-        {/* TODO: replace "Admin User" with session.user.name */}
-        <span className="text-sm text-[#888] hidden sm:block">Admin User</span>
+        <span className="text-sm text-[#888] hidden sm:block">{session?.name}</span>
         <div className="w-9 h-9 rounded-full bg-[#c05a2a] flex items-center justify-center text-white font-bold text-sm select-none">
-          {/* TODO: replace "A" with session.user.name[0].toUpperCase() */}
-          A
+          {session?.name[0].toUpperCase()}
+          
         </div>
         <button
           onClick={handleLogout}

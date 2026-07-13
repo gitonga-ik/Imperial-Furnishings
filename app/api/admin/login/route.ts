@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
       const cookieStore = await cookies();
 
-      cookieStore.set("token", token, {
+      cookieStore.set("access_token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",

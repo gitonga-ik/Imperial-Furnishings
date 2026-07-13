@@ -26,7 +26,9 @@ export async function recentProducts() {
   try {
     const recentProducts = await prisma.product.findMany({
       select: {
+        id: true,
         name: true,
+        slug: true,
         price: true,
         createdAt: true,
         category: {

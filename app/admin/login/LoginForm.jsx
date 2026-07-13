@@ -20,7 +20,7 @@ export default function LoginForm() {
     setError("");
     setLoading(true);
     try {
-      const response = await fetch("/api/admin/auth", {
+      const response = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -30,13 +30,14 @@ export default function LoginForm() {
       });
 
       const result = await response.json();
+      console.log(result);
 
       if (result.success) {
         router.push("/admin/dashboard");
-        return;
       }
-
+      
       setError(result.message);
+      return;
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {

@@ -40,6 +40,7 @@ export const getCategory = cache(async (slug: string) => {
         description: true,
         product: {
           select: {
+            id: true,
             name: true,
             price: true,
             slug: true,
