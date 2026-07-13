@@ -1,12 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getTopCategories } from "@/services/category";
 
 export const metadata = { title: "Home" };
 
 export default async function HomePage() {
-  const { payload: categories } = await getTopCategories();
-
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
@@ -45,31 +42,7 @@ export default async function HomePage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-            {categories.map((category) => (
-              <div
-                key={category.id}
-                className="rounded-2xl overflow-hidden shadow-sm border-none bg-white"
-              >
-                {category.image ? (
-                  <div className="relative h-56 w-full">
-                    <Image
-                      src={category.image}
-                      alt={category.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ) : null}
-                <div className="p-4">
-                  <Link
-                    href={`/categories/${category.slug}`}
-                    className="text-[#2b2b2b] no-underline font-medium hover:text-[#c05a2a] transition-colors"
-                  >
-                    {category.name} <span>→</span>
-                  </Link>
-                </div>
-              </div>
-            ))}
+            <p>Our categories</p>
           </div>
         </div>
       </section>
