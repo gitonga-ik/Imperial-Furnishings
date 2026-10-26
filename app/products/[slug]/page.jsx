@@ -25,7 +25,7 @@ export default async function ProductDetailPage({ params }) {
 
   const specs = parseSpecs(product.specs);
 
-  const waLink = `https://wa.me/254700000000?text=${encodeURIComponent(
+  const waLink = `https://wa.me/254704338341?text=${encodeURIComponent(
     `I'm interested in ${product.name}`,
   )}`;
 
@@ -140,7 +140,7 @@ export default async function ProductDetailPage({ params }) {
                 CONTACT VIA WHATSAPP
               </a>
               <a
-                href="https://instagram.com/cozycorner"
+                href="https://instagram.com/imperial_furnishings_"
                 className="btn-instagram"
               >
                 <i className="bi bi-instagram" />

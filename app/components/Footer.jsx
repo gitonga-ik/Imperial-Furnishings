@@ -41,7 +41,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://instagram.com/imperial_furnishings_"
               aria-label="Instagram"
               className="text-[#cccccc] hover:text-[#d4af37] transition-colors text-lg"
             >
@@ -86,7 +86,7 @@ export default function Footer() {
         {/* Contact column */}
         <div>
           <h4 className="text-[#d4af37] uppercase text-sm font-semibold tracking-wider mb-5">
-            Reach Out
+            Reach Out254700000000
           </h4>
           <div className="flex flex-col gap-5">
             {/* Phone */}
@@ -119,14 +119,14 @@ export default function Footer() {
                   Call Us
                 </span>
                 <strong className="block font-dm-sans text-base">
-                  +254 700 000 000
+                  +254 704 338 341
                 </strong>
               </div>
             </a>
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/254700000000?text=Hello%2C%20I%20have%20an%20inquiry%20about%20Imperial%20Furnishings"
+              href="https://wa.me/254704338341?text=Hello%2C%20I%20have%20an%20inquiry%20about%20Imperial%20Furnishings"
               className="flex items-center gap-4 text-white no-underline
                          transition-transform duration-300
                          hover:translate-x-2 hover:text-[#d4af37] group"
@@ -161,28 +161,10 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="mt-12 pt-5 border-t border-[#333] text-[#888] text-xs">
-        <div className="container mx-auto px-4 flex flex-wrap items-center justify-between gap-2">
-          <p className="m-0">
+        <div className="container mx-auto px-4 flex items-center justify-center">
+          <p className="m-0 text-center">
             &copy; {year} Imperial Furnishings. All rights reserved.
           </p>
-          <ul className="flex gap-4 list-none m-0 p-0">
-            <li>
-              <a
-                href="#"
-                className="text-[#888] hover:text-[#d4af37] transition-colors no-underline"
-              >
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#888] hover:text-[#d4af37] transition-colors no-underline"
-              >
-                Terms of Service
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
     </footer>
