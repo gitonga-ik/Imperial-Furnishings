@@ -17,7 +17,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-[#ede2d0] py-4 relative z-50">
+    <nav className="bg-[#ede2d0] py-6 relative z-50">
       <div className="container mx-auto px-4 flex items-center justify-between">
 
         {/* Logo */}
@@ -25,19 +25,19 @@ export default function Navbar() {
           <Image
             src="/images/logo.svg"
             alt="Imperial Furnishings Logo"
-            height={50}
-            width={160}
+            height={100}
+            width={310}
             priority
           />
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-10">
           {navLinks.map(({ label, href }) => (
             <Link
               key={href}
               href={href}
-              className={`nav-link-underline text-sm ${
+              className={`nav-link-underline text-base xl:text-lg ${
                 pathname === href ? 'after:w-full' : ''
               }`}
             >
@@ -48,7 +48,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden text-3xl text-[#2b2b2b] bg-transparent border-none cursor-pointer"
+          className="lg:hidden text-4xl text-[#2b2b2b] bg-transparent border-none cursor-pointer"
           aria-label="Toggle navigation"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -64,7 +64,7 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className="nav-link-underline text-lg"
+              className="nav-link-underline text-xl"
               onClick={() => setMenuOpen(false)}
             >
               {label}

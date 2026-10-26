@@ -70,7 +70,11 @@ export default function CategoryForm({ initial = null }) {
         uploadResult = await uploadResponse.json();
 
         if (!uploadResult.success) {
-          setErrors(uploadResult.errors);
+          setErrors(
+            uploadResult.errors ?? {
+              form: result.message ?? "The operation failed. Please try again.",
+            },
+          );
           return;
         }
       }
@@ -90,7 +94,11 @@ export default function CategoryForm({ initial = null }) {
         const result = await response.json();
 
         if (!result.success) {
-          setErrors(result.errors);
+          setErrors(
+            result.errors ?? {
+              form: result.message ?? "The operation failed. Please try again.",
+            },
+          );
           return;
         }
       } else {
@@ -107,7 +115,11 @@ export default function CategoryForm({ initial = null }) {
         const result = await response.json();
 
         if (!result.success) {
-          setErrors(result.errors);
+          setErrors(
+            result.errors ?? {
+              form: result.message ?? "The operation failed. Please try again.",
+            },
+          );
           return;
         }
       }
@@ -122,7 +134,7 @@ export default function CategoryForm({ initial = null }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      {errors.form ? (
+      {errors?.form ? (
         <p className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg px-4 py-2.5">
           {errors.form}
         </p>

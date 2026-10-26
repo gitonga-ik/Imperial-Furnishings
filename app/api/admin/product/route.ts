@@ -1,12 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createProduct, updateProduct } from "@/services/products";
 import { ProductSchema } from "@/services/schemas";
 import { Product } from "@/services/interfaces";
 import { UUID } from "crypto";
+import { verifyAuth } from "@/services/users";
 
-const id: UUID = "4741f0a7-d5f2-420d-b7bd-6206b2a4ed6b";
+const id: UUID = "803129e8-02a8-45ac-9d33-acd84dcc3dc2";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const validation = ProductSchema.safeParse(body);
@@ -22,12 +23,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ errors: validationErrors }, { status: 400 });
     }
 
+    const loginUrl = new URL("/admin/login", request.url);
+
+    const token = request.cookies.get("access_token");
+
+    if (!token || !token.value) {
+      return NextResponse.redirect(loginUrl);
+    }
+
+    const { payload: user } = await verifyAuth(token.value);
+
     const product: Product = {
       name: body.name,
       price: Number(body.price),
       description: body.description,
       category_id: body.category_id,
-      created_by: id,
+      created_by: <UUID>user?.id,
       image: body.imageURL ?? "",
     };
 
@@ -55,7 +66,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function PATCH(request: Request) {
+export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();
 
@@ -72,12 +83,22 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ errors: validationErrors }, { status: 400 });
     }
 
+    const loginUrl = new URL("/admin/login", request.url);
+
+    const token = request.cookies.get("access_token");
+
+    if (!token || !token.value) {
+      return NextResponse.redirect(loginUrl);
+    }
+
+    const { payload: user } = await verifyAuth(token.value);
+
     const product: Product = {
       name: body.name,
       price: Number(body.price),
       description: body.description,
-      category_id: body.id,
-      created_by: id,
+      category_id: body.category_id,
+      created_by: <UUID>user?.id,
       image: body.imageURL,
     };
 
@@ -90,16 +111,18 @@ export async function PATCH(request: Request) {
       );
     }
 
+    console.log(result)
+
     return NextResponse.json(
       {
         success: false,
-        message: `Unable to create product.`,
+        message: `Unable to update product.`,
       },
       { status: 500 },
     );
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: `Could not create product.` },
+      { success: false, message: `Could not update product.` },
       { status: 500 },
     );
   }

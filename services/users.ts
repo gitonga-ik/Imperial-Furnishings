@@ -33,15 +33,14 @@ export async function createUser(user: User): Promise<ApiResponse> {
   }
 }
 
-export async function getUser(
-  email: string,
-): Promise<PayloadResponse> {
+export async function getUser(email: string): Promise<PayloadResponse> {
   try {
     const user = await prisma.users.findUnique({
       where: { email },
     });
 
-    if (!user) return { success: false, message: "User not found.", payload: null };
+    if (!user)
+      return { success: false, message: "User not found.", payload: null };
 
     return { success: true, message: "User found.", payload: user };
   } catch (error) {
@@ -54,14 +53,13 @@ export async function deleteUser(id: UUID): Promise<ApiResponse> {
     await prisma.users.delete({ where: { id } });
     return { success: true, message: "User deleted successfully." };
   } catch (error) {
-  
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === "P2025"
     ) {
       return { success: false, message: "User does not exist." };
     }
-  
+
     throw error;
   }
 }
@@ -76,11 +74,11 @@ export async function updateUser(
       where: { id },
       data: {
         ...userData,
-         role : {
-        connect : {
-          id : role
-        }
-      }
+        role: {
+          connect: {
+            id: role,
+          },
+        },
       },
     });
     return {
@@ -89,14 +87,13 @@ export async function updateUser(
       payload: usr,
     };
   } catch (error) {
-  
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === "P2025"
     ) {
       return { success: false, message: "User does not exist." };
     }
-  
+
     throw error;
   }
 }

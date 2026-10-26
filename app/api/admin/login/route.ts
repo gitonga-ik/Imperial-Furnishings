@@ -30,7 +30,6 @@ export async function POST(request: Request) {
         .setExpirationTime("1d")
         .sign(SECRET_KEY);
 
-
       const cookieStore = await cookies();
 
       cookieStore.set("access_token", token, {
@@ -49,8 +48,16 @@ export async function POST(request: Request) {
       { status: 401 },
     );
   } catch (error) {
+    console.error("Admin login error:", error);
+
     return NextResponse.json(
-      { success: false, message: error },
+      {
+        success: false,
+        message:
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred.",
+      },
       { status: 401 },
     );
   }

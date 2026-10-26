@@ -1,36 +1,36 @@
-'use client';
+"use client";
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from "next/navigation";
 
 const LABELS = {
-  '/admin/dashboard':   'Dashboard',
-  '/admin/categories':  'Categories',
-  '/admin/categories/new': 'New Category',
-  '/admin/products':    'Products',
-  '/admin/products/new': 'New Product',
-  '/admin/register':    'Register Staff',
+  "/admin/dashboard": "Dashboard",
+  "/admin/categories": "Categories",
+  "/admin/categories/new": "New Category",
+  "/admin/products": "Products",
+  "/admin/products/new": "New Product",
+  "/admin/register": "Register Staff",
 };
 
 function pageTitle(pathname) {
   if (LABELS[pathname]) return LABELS[pathname];
-  if (pathname.includes('/categories/')) return 'Category Detail';
-  if (pathname.includes('/products/'))   return 'Product Detail';
-  return 'Admin';
+  if (pathname.includes("/categories/")) return "Category Detail";
+  if (pathname.includes("/products/")) return "Product Detail";
+  return "Admin";
 }
 
-export default function AdminTopbar({session}) {
+export default function AdminTopbar({ session }) {
   const pathname = usePathname();
   const router = useRouter();
 
   async function handleLogout() {
     const response = await fetch("/api/admin/logout", {
-          method: "POST",
-        });
-    
+      method: "POST",
+    });
+
     const result = await response.json();
 
-    if(result.success){
-      router.push("/admin/login")
+    if (result.success) {
+      router.push("/admin/login");
     }
 
     router.refresh();
@@ -42,10 +42,11 @@ export default function AdminTopbar({session}) {
         {pageTitle(pathname)}
       </h1>
       <div className="flex items-center gap-4">
-        <span className="text-sm text-[#888] hidden sm:block">{session?.name}</span>
+        <span className="text-sm text-[#888] hidden sm:block">
+          {session?.name}
+        </span>
         <div className="w-9 h-9 rounded-full bg-[#c05a2a] flex items-center justify-center text-white font-bold text-sm select-none">
           {session?.name[0].toUpperCase()}
-          
         </div>
         <button
           onClick={handleLogout}
