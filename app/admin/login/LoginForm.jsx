@@ -30,12 +30,11 @@ export default function LoginForm() {
       });
 
       const result = await response.json();
-      console.log(result);
 
       if (result.success) {
         router.push("/admin/dashboard");
       }
-      
+
       setError(result.message);
       return;
     } catch {

@@ -1,12 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createCategory, updateCategory } from "@/services/category";
 import { CategorySchema } from "@/services/schemas";
 import { Category } from "@/services/interfaces";
 import { UUID } from "crypto";
+import { verifyAuth } from "@/services/users";
 
-const id: UUID = "4741f0a7-d5f2-420d-b7bd-6206b2a4ed6b";
-
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
@@ -20,13 +19,26 @@ export async function POST(request: Request) {
         validationErrors[fieldName] = issue.message;
       });
 
-      return NextResponse.json({ errors: validationErrors }, { status: 400 });
+      return NextResponse.json(
+        { success: false, errors: validationErrors },
+        { status: 400 },
+      );
     }
+
+    const loginUrl = new URL("/admin/login", request.url);
+
+    const token = request.cookies.get("access_token");
+
+    if (!token || !token.value) {
+      return NextResponse.redirect(loginUrl);
+    }
+
+    const { payload: user } = await verifyAuth(token.value);
 
     const category: Category = {
       name: body.name,
       description: body.description,
-      created_by: id,
+      created_by: <UUID>user?.id,
       image: body.imageURL,
     };
 
@@ -54,7 +66,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function PATCH(request: Request) {
+export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();
 
@@ -68,17 +80,30 @@ export async function PATCH(request: Request) {
         validationErrors[fieldName] = issue.message;
       });
 
-      return NextResponse.json({ errors: validationErrors }, { status: 400 });
+      return NextResponse.json(
+        { success: false, errors: validationErrors },
+        { status: 400 },
+      );
     }
+
+    const loginUrl = new URL("/admin/login", request.url);
+
+    const token = request.cookies.get("access_token");
+
+    if (!token || !token.value) {
+      return NextResponse.redirect(loginUrl);
+    }
+
+    const { payload: user } = await verifyAuth(token.value);
 
     const category: Category = {
       name: body.name,
       description: body.description,
-      created_by: id,
+      created_by: <UUID>user?.id,
       image: body.imageURL,
     };
 
-    const result = await updateCategory(body.id, category);
+    const result = await updateCategory(body.slug, category);
 
     if (result.success) {
       return NextResponse.json(
@@ -90,13 +115,13 @@ export async function PATCH(request: Request) {
     return NextResponse.json(
       {
         success: false,
-        message: `Unable to create category.`,
+        message: `Unable to update category.`,
       },
       { status: 500 },
     );
   } catch (error) {
     return NextResponse.json(
-      { success: false, message: `Could not create category.` },
+      { success: false, message: `Could not update category.` },
       { status: 500 },
     );
   }

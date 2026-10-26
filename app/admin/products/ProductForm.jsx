@@ -92,7 +92,7 @@ export default function ProductForm({
           body: JSON.stringify({
             ...initial,
             name: form.name,
-            price: form.price,
+            price: Number(form.price),
             category_id: form.category_id,
             description: form.description,
             imageURL: uploadResult?.url ?? initial?.image ?? null,
@@ -100,6 +100,8 @@ export default function ProductForm({
         });
 
         const result = await response.json();
+        console.log("Product response status:", response.status);
+        console.log("Product response:", result);
 
         if (!result.success) {
           setErrors(result.errors);
@@ -111,7 +113,7 @@ export default function ProductForm({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name: form.name,
-            price: form.price,
+            price: Number(form.price),
             category_id: form.category_id,
             description: form.description,
             imageURL: uploadResult?.url ?? null,
@@ -119,6 +121,8 @@ export default function ProductForm({
         });
 
         const result = await response.json();
+        console.log("Product response status:", response.status);
+        console.log("Product response:", result);
 
         if (!result.success) {
           setErrors(result.errors);
@@ -136,7 +140,7 @@ export default function ProductForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <Field label="Product Name" error={errors.name}>
+      <Field label="Product Name" error={errors?.name}>
         <Input
           name="name"
           value={form.name}
@@ -146,7 +150,7 @@ export default function ProductForm({
         />
       </Field>
 
-      <Field label="Price (Ksh)" error={errors.price}>
+      <Field label="Price (Ksh)" error={errors?.price}>
         <Input
           type="number"
           name="price"
@@ -159,7 +163,7 @@ export default function ProductForm({
         />
       </Field>
 
-      <Field label="Category" error={errors.category_id}>
+      <Field label="Category" error={errors?.category_id}>
         <Select
           name="category_id"
           value={form.category_id}
@@ -175,7 +179,7 @@ export default function ProductForm({
         </Select>
       </Field>
 
-      <Field label="Description" error={errors.description}>
+      <Field label="Description" error={errors?.description}>
         <Textarea
           name="description"
           value={form.description}
@@ -184,7 +188,7 @@ export default function ProductForm({
         />
       </Field>
 
-      <Field label="Product Image" error={errors.image}>
+      <Field label="Product Image" error={errors?.image}>
         <label
           className="flex flex-col items-center justify-center w-full h-36
                     border-2 border-dashed border-[#d6cfc5] rounded-xl
