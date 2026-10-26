@@ -42,6 +42,7 @@ export interface Product {
 export interface ApiResponse {
   success: boolean;
   message: string;
+  payload?: any;
 }
 
 export interface PayloadResponse {
