@@ -18,7 +18,7 @@ export default function VisitPage() {
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=-1.286389,36.817223&output=embed"
+            src="https://www.google.com/maps?q=-1.290704,36.89346&output=embed"
             title="Imperial Furnishings Showroom Location"
           />
         </div>
