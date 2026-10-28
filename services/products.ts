@@ -133,13 +133,41 @@ export async function getAllProducts(): Promise<PayloadResponse> {
 
     return {
       success: true,
-      message: "Products fetchd successfully.",
+      message: "Products fetched successfully.",
       payload: products,
     };
   } catch (error) {
     return {
       success: false,
-      message: `Error deleting product: ${error}`,
+      message: `Error fetching products: ${error}`,
+      payload: null,
+    };
+  }
+}
+
+export async function getTopProducts(): Promise<PayloadResponse> {
+  try {
+    const products = await prisma.product.findMany({
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        image: true,
+        createdAt: true,
+      },
+      orderBy: { createdAt: "desc" },
+      take: 6,
+    });
+
+    return {
+      success: true,
+      message: "Products fetched successfully.",
+      payload: products,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: `Error fetching products: ${error}`,
       payload: null,
     };
   }

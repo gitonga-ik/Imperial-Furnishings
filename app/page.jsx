@@ -1,11 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getTopCategories } from "@/services/category";
+import { getTopProducts } from "@/services/products";
+import PopularProducts from "./components/PopularProducts";
 
 export const metadata = { title: "Home" };
 
 export default async function HomePage() {
   const { payload: categories } = await getTopCategories();
+  const { payload: products } = await getTopProducts();
 
   return (
     <>
@@ -38,7 +41,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="py-20">
+      <PopularProducts products={products}/>
+
+      <section className="py-3">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-playfair text-4xl font-bold mb-10">
             Our Collections
@@ -75,7 +80,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Showroom CTA ─────────────────────────────────────────────────── */}
-      <section className="container mx-auto px-4 py-16 md:py-24 text-center mb-4">
+      <section className="container mx-auto px-4 py-16 md:py-10 text-center mb-4">
         <h2 className="font-playfair text-3xl md:text-4xl font-bold text-[#2b2b2b]">
           Visit Our Showroom
         </h2>
