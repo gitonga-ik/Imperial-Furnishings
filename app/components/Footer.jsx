@@ -86,7 +86,7 @@ export default function Footer() {
         {/* Contact column */}
         <div>
           <h4 className="text-[#d4af37] uppercase text-sm font-semibold tracking-wider mb-5">
-            Reach Out254700000000
+            Reach Out To Us
           </h4>
           <div className="flex flex-col gap-5">
             {/* Phone */}
